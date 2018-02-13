@@ -12,7 +12,7 @@ podTemplate(label: 'pod-hugo-app', containers: [
 
     node('pod-hugo-app') {
 
-        def DOCKER_HUB_ACCOUNT = 'prasanna1994'
+        def DOCKER_HUB_ACCOUNT = 'smesch'
         def DOCKER_IMAGE_NAME = 'hugo-app-jenkins'
         def K8S_DEPLOYMENT_NAME = 'hugo-app'
 
