@@ -42,12 +42,12 @@ podTemplate(label: 'pod-hugo-app', containers: [
             }
 
             container('kubectl') {
-            	stages('Deploy') {
+            	
 	                stage('Deploy New Build To pre-production Environment') {
 	                    sh ("kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_HUB_ACCOUNT}/${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} --namespace=pre-production")
 	                    echo 'Test the application on pre-production Environment then make the decision'
 	                    echo "access your service via http://${K8S_DEPLOYMENT_NAME}-preprod.cto.logi.com"
-	                    steps {
+	                    //steps {
 	                		script {
 	                    		env.RELEASE_SCOPE = input message: 'Do You wanto to push to Production Environment ?', ok: 'Release!',
 	                            parameters: [choice(name: 'DECISION', choices: 'yes\nno', description: 'What is your choice?')]
@@ -63,9 +63,9 @@ podTemplate(label: 'pod-hugo-app', containers: [
 
 
 	                		}//switch
-	            		}//steps	
+	            		//}//steps	
 	               }//stage 1
-	           }//stages
+	           
 	        }
 
         }        
