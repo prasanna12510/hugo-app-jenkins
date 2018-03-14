@@ -53,10 +53,11 @@ podTemplate(label: 'pod-hugo-app', containers: [
 	                            parameters: [booleanParam(name: 'Release!', description: 'What is your choice?')]
 	                		}
 	                		echo(env.RELEASE_SCOPE)
-	                		if(env.RELEASE_SCOPE==true){
+	                		if(env.RELEASE_SCOPE){
 
 	                			stage('Deploying to Production Environment'){
 	                				sh ("kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_HUB_ACCOUNT}/${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
+	                				echo 'Deployed to Production Successfully!!!...'
 	                			
 	                			}//stage
 	                			
