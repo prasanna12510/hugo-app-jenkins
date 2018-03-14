@@ -52,6 +52,7 @@ podTemplate(label: 'pod-hugo-app', containers: [
 	                    		env.RELEASE_SCOPE = input message: 'Do You want push to Production Environment ?', ok: 'Release!',
 	                            parameters: [booleanParam(name: 'Release!', description: 'What is your choice?')]
 	                		}
+	                		echo(env.RELEASE_SCOPE)
 	                		if(env.RELEASE_SCOPE==true){
 
 	                			stage('Deploying to Production Environment'){
