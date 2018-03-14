@@ -49,19 +49,16 @@ podTemplate(label: 'pod-hugo-app', containers: [
 	                    echo "access your service via http://${K8S_DEPLOYMENT_NAME}-preprod.cto.logi.com"
 	                    //steps {
 	                		script {
-	                    		env.RELEASE_SCOPE = input message: 'Do You wanto to push to Production Environment ?', ok: 'Release!',
-	                            parameters: [choice(name: 'DECISION', choices: 'yes\nno', description: 'What is your choice?')]
+	                    		env.RELEASE_SCOPE = input message: 'Do You want push to Production Environment ?', ok: 'Release!',
+	                            parameters: [booleanParam(name: 'Release!', description: 'What is your choice?')]
 	                		}
-	                		switch(env.RELEASE_SCOPE){
+	                		if(env.RELEASE_SCOPE==true){
 
-	                			case "yes":
 	                			stage('Deploying to Production Environment'){
 	                				sh ("kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_HUB_ACCOUNT}/${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
-	                				break
-
+	                			
 	                			}//stage
-
-
+	                			
 	                		}//switch
 	            		//}//steps	
 	               }//stage 1
