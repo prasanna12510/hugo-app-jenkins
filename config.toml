@@ -31,7 +31,7 @@ googleAnalytics = ""
 	highlight_css  = ""
 
 	[params.palette]
-    	primary = "red"
+    	primary = "yellow"
     	accent  = "teal"
 
     [params.font]
